@@ -20,4 +20,5 @@ export class RegisterAuthDto {
     message: 'Password minimal 6 karakter',
   })
   password: string;
+    passwordConfirmation: string;
 }
