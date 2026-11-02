@@ -1,16 +1,40 @@
-import { IsNotEmpty, IsInt } from 'class-validator';
+
+import {
+  IsNotEmpty,
+  IsString,
+  IsInt,
+  IsUUID,
+  IsNumber,
+  Min,
+  MaxLength,
+} from 'class-validator';
 
 export class CreateBookDto {
-    @IsNotEmpty({ message: 'Name is required' })
-    readonly name: string;
+  @IsString()
+  @IsNotEmpty({ message: 'Title wajib diisi' })
+  @MaxLength(30)
+  readonly title: string;
 
-    @IsNotEmpty({ message: 'Author is required' })
-    readonly author: string;
+  @IsString()
+  @IsNotEmpty({ message: 'ISBN wajib diisi' })
+  @MaxLength(45)
+  readonly isbn: string;
 
-    @IsNotEmpty({message: 'ISBN is required'})
-    readonly isbn: string;
+  @IsInt({ message: 'Published year harus berupa bilangan bulat' })
+  @Min(0)
+  readonly publishedYear: number;
 
-    @IsNotEmpty({message: 'Published year must be a number'})
-    @IsInt({message: 'Published year must be an integer'})
-    readonly publishedYear: number;
+  @IsUUID()
+  readonly categoryId: string;
+
+  @IsUUID()
+  readonly publisherId: string;
+
+  @IsNumber()
+  @Min(0)
+  readonly price: number;
+
+  @IsInt()
+  @Min(0)
+  readonly stock: number;
 }
